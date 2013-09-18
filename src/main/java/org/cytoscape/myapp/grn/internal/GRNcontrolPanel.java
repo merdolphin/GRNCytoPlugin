@@ -3,10 +3,16 @@ package org.cytoscape.myapp.grn.internal;
 
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import org.cytoscape.application.swing.CytoPanel;
@@ -18,11 +24,34 @@ import org.cytoscape.application.swing.CytoPanelName;
 public class GRNcontrolPanel extends JPanel implements CytoPanelComponent {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private JLayeredPane algorithmLayeredPane;
+
+	private JCheckBox bayesianCheckbox;
+	private JCheckBox randomForestCheckbox;
+	private JCheckBox ridgeRegressionCheckbox;
 
 	public GRNcontrolPanel(){
-		JLabel lbxyz = new JLabel("lina");
 		
-		this.add(lbxyz);
+		
+		// creat the algorithm layered pane
+		algorithmLayeredPane = new JLayeredPane();
+		algorithmLayeredPane.setPreferredSize(new Dimension(250,200));
+		algorithmLayeredPane.setBorder(BorderFactory.createTitledBorder("Algorithm"));
+		algorithmLayeredPane.setLayout(new GridLayout(3,1));
+		
+		bayesianCheckbox = new JCheckBox("Dynamic Bayesian Networks");
+		bayesianCheckbox.setSelected(true);
+		
+		randomForestCheckbox = new JCheckBox("Random Forest");
+		ridgeRegressionCheckbox = new JCheckBox("Ridge Regression");
+		
+		algorithmLayeredPane.add(bayesianCheckbox);
+		algorithmLayeredPane.add(randomForestCheckbox);
+		algorithmLayeredPane.add(ridgeRegressionCheckbox);
+	
+
+		this.add(algorithmLayeredPane);
 		this.setVisible(true);
 	}
 		
