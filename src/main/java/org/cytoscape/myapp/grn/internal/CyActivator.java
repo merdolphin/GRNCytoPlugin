@@ -8,8 +8,8 @@ import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.osgi.framework.BundleContext;
-import org.cytoscape.myapp.grn.internal.*;
-import org.cytoscape.myapp.grn.internal.*;
+
+
 
 
 public class CyActivator extends AbstractCyActivator {

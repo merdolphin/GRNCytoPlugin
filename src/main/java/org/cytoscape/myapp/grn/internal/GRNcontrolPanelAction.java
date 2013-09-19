@@ -19,7 +19,7 @@ public class GRNcontrolPanelAction extends AbstractCyAction{
 	
 	public GRNcontrolPanelAction(CySwingApplication desktopApp, GRNcontrolPanel grnControlPanel) {
 		super("GRN");
-		setPreferredMenu("GRN analysis");
+		//setPreferredMenu("GRN analysis");
 		
 		this.desktopApp = desktopApp;
 		this.cytoPanelSouth = this.desktopApp.getCytoPanel(CytoPanelName.SOUTH);
