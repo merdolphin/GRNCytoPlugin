@@ -1,7 +1,6 @@
 package org.cytoscape.myapp.grn.internal;
 
 
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,8 +19,11 @@ import javax.swing.JSeparator;
 
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
-
-
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.myapp.grn.internal.*;
+import org.cytoscape.session.CyNetworkNaming;
+import org.osgi.framework.BundleContext;
 
 public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, ActionListener {
 	
@@ -108,7 +110,11 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 		}
 		
 		
+		
+		
 		JOptionPane.showMessageDialog(null, selectedCheckbox);
 	}
+	
+	
 	
 }
