@@ -2,7 +2,6 @@ package org.cytoscape.myapp.grn.internal;
 
 
 
-import java.awt.CheckboxGroup;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -30,12 +29,13 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 	
 	private JLayeredPane algorithmLayeredPane;
 
-	private ButtonGroup group = new ButtonGroup();
+	private ButtonGroup checkboxgroup = new ButtonGroup();
 	private JCheckBox bayesianCheckbox;
 	private JCheckBox randomForestCheckbox;
 	private JCheckBox ridgeRegressionCheckbox;
 	
 	private JButton generateNetworkButton;
+	private String selectedCheckbox = "bayesianCheckbox";
 
 	public GRNcontrolPanel(){
 		
@@ -51,9 +51,9 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 		randomForestCheckbox = new JCheckBox("Random Forest");
 		ridgeRegressionCheckbox = new JCheckBox("Ridge Regression");
 		
-		group.add(bayesianCheckbox);
-		group.add(randomForestCheckbox);
-		group.add(ridgeRegressionCheckbox);
+		checkboxgroup.add(bayesianCheckbox);
+		checkboxgroup.add(randomForestCheckbox);
+		checkboxgroup.add(ridgeRegressionCheckbox);
 		
 		generateNetworkButton = new JButton("Generate Network");
 		
@@ -97,10 +97,18 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {		
 		
-		JOptionPane.showMessageDialog(null, "generating ...");
+		if( randomForestCheckbox.isSelected() ){
+			selectedCheckbox = "a";
+		}
+		
+		if( ridgeRegressionCheckbox.isSelected() ){
+			selectedCheckbox = "b";
+		}
+		
+		
+		JOptionPane.showMessageDialog(null, selectedCheckbox);
 	}
-
-
+	
 }

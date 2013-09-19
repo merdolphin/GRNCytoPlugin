@@ -6,11 +6,11 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CyAction;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.osgi.framework.BundleContext;
-
-
-
+import org.cytoscape.myapp.grn.internal.CreateNetworkFromOutput;
 
 public class CyActivator extends AbstractCyActivator {
 
@@ -25,6 +25,11 @@ public class CyActivator extends AbstractCyActivator {
 		
 		GRNcontrolPanel grnControlPanel = new GRNcontrolPanel();
 		GRNcontrolPanelAction controlPanelAction = new GRNcontrolPanelAction(cytoscapeDesktopService, grnControlPanel);
+		
+		
+		CyNetwork grnNetwork = new CreateNetworkFromOutput();
+		CyNetworkManager networkManager = getService(context, CyNetworkManager.class);
+		networkManager.addNetwork(grnNetwork);
 		
 		
 		Properties properties = new Properties();
