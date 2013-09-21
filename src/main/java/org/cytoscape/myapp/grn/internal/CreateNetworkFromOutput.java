@@ -16,16 +16,14 @@ public class CreateNetworkFromOutput extends AbstractTaskFactory {
 	private final CyNetworkManager netMgr;
 	private final CyNetworkNaming namingUtil;
 	private final CyNetworkFactory grnFactory;
-	private final String finalOutputFileName;
+
 	
 	public CreateNetworkFromOutput(final CyNetworkManager netMgr, 
-			final CyNetworkNaming namingUtil, final CyNetworkFactory grnFactory,
-			final String finalOutputFileName){
+			final CyNetworkNaming namingUtil, final CyNetworkFactory grnFactory){
 		
 		this.netMgr = netMgr;
 		this.namingUtil = namingUtil;
 		this.grnFactory = grnFactory;
-		this.finalOutputFileName = finalOutputFileName;
 	}
 	
 	

@@ -6,10 +6,12 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CyAction;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.application.swing.CytoPanelComponent;
+import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.session.CyNetworkNaming;
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskFactory;
 import org.osgi.framework.BundleContext;
 import org.cytoscape.myapp.grn.internal.CreateNetworkFromOutput;
@@ -34,9 +36,14 @@ public class CyActivator extends AbstractCyActivator {
 		CyNetworkFactory cyNetworkFactoryServiceRef = getService(context, CyNetworkFactory.class);
 		
 		CreateNetworkFromOutput  createNetworkFromOutput = new CreateNetworkFromOutput(cyNetworkManagerServiceRef, 
-				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef, "a");
+				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef);
 	
 	
+		CyNetworkView grnNetworkView = getService(context, CyNetworkView.class);
+		CyEventHelper eventHelper = getService(context, CyEventHelper.class);
+		
+		eventHelper.flushPayloadEvents();
+		grnNetworkView.updateView();
 		
 		Properties properties = new Properties();
 		

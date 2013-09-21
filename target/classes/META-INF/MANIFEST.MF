@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1379607379278
+Bnd-LastModified: 1379779981344
 Build-Jdk: 1.6.0_27
 Built-By: lina
 Bundle-Activator: org.cytoscape.myapp.grn.internal.CyActivator
@@ -10,8 +10,8 @@ Bundle-Version: 0.0.1
 Created-By: Apache Maven Bundle Plugin
 Import-Package: javax.swing,javax.swing.border,org.cytoscape.application
  ;version="[3.0,4)",org.cytoscape.application.swing;version="[3.0,4)",or
- g.cytoscape.model;version="[3.0,4)",org.cytoscape.service.util;version=
- "[3.0,4)",org.cytoscape.session;version="[3.0,4)",org.cytoscape.view.mo
- del;version="[3.0,4)",org.cytoscape.work;version="[3.0,4)",org.osgi.fra
- mework;version="[1.5,2)"
+ g.cytoscape.event;version="[3.0,4)",org.cytoscape.model;version="[3.0,4
+ )",org.cytoscape.service.util;version="[3.0,4)",org.cytoscape.session;v
+ ersion="[3.0,4)",org.cytoscape.view.model;version="[3.0,4)",org.cytosca
+ pe.work;version="[3.0,4)",org.osgi.framework;version="[1.5,2)"
 Tool: Bnd-1.50.0
