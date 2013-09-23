@@ -25,7 +25,7 @@ public class CyActivator extends AbstractCyActivator {
 		CySwingApplication cytoscapeDesktopService = getService(context, CySwingApplication.class);
 		
 		
-		MenuAction action = new MenuAction(cyAppManager, "GRN analysis");
+		MenuAction action = new MenuAction(cyAppManager, "Open");
 		
 		GRNcontrolPanel grnControlPanel = new GRNcontrolPanel();
 		GRNcontrolPanelAction controlPanelAction = new GRNcontrolPanelAction(cytoscapeDesktopService, grnControlPanel);
@@ -38,7 +38,7 @@ public class CyActivator extends AbstractCyActivator {
 		CreateNetworkFromOutput  createNetworkFromOutput = new CreateNetworkFromOutput(cyNetworkManagerServiceRef, 
 				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef);
 	
-	
+		
 		CyNetworkView grnNetworkView = getService(context, CyNetworkView.class);
 		CyEventHelper eventHelper = getService(context, CyEventHelper.class);
 		
@@ -47,16 +47,14 @@ public class CyActivator extends AbstractCyActivator {
 		
 		Properties properties = new Properties();
 		
+		registerAllServices(context, action, properties);
 		registerService(context,grnControlPanel,CytoPanelComponent.class,properties);
 		registerService(context, controlPanelAction, CyAction.class, properties);
 		
-		Properties sample05TaskFactoryProps = new Properties();
-		sample05TaskFactoryProps.setProperty("preferredMenu","GRN analysis");
-		sample05TaskFactoryProps.setProperty("title","Create Network");
-		sample05TaskFactoryProps.setProperty("setName","generating");
-		
-		registerService(context, createNetworkFromOutput,TaskFactory.class, sample05TaskFactoryProps);
-		registerAllServices(context, action, properties);
+		Properties createNetworkViewTaskFactoryProps = new Properties();
+		createNetworkViewTaskFactoryProps.setProperty("preferredMenu","Apps.GRN Analysis");
+		createNetworkViewTaskFactoryProps.setProperty("title","Create Network");
+		registerService(context, createNetworkFromOutput,TaskFactory.class, createNetworkViewTaskFactoryProps);
 		
 		 
 	}

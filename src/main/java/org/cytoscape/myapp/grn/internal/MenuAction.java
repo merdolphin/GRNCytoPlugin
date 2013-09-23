@@ -1,31 +1,55 @@
 package org.cytoscape.myapp.grn.internal;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
+import javax.swing.Icon;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.AbstractCyAction;
+import org.cytoscape.application.swing.CytoPanelComponent;
+import org.cytoscape.application.swing.CytoPanelName;
 
-/**
- * Creates a new menu item under Apps menu section.
- *
- */
-public class MenuAction extends AbstractCyAction {
+
+public class MenuAction extends AbstractCyAction implements CytoPanelComponent, ActionListener {
 
 	private static final long serialVersionUID = -8449628090722031884L;
 
 	public MenuAction(CyApplicationManager cyApplicationManager, final String menuTitle) {
 		
 		super(menuTitle, cyApplicationManager, null, null);
-		setPreferredMenu("Apps");
+		setPreferredMenu("Apps.GRN Analysis");
 		
 	}
 
-	public void actionPerformed(ActionEvent e) {
 
-		// Write your own function here.
-		JOptionPane.showMessageDialog(null, "so slow");
-		
+
+	@Override
+	public Component getComponent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CytoPanelName getCytoPanelName() {
+		// TODO Auto-generated method stub
+		return CytoPanelName.SOUTH;
+	}
+
+	@Override
+	public Icon getIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		OpenFileFrame newFrame = new OpenFileFrame(); 
 	}
 }

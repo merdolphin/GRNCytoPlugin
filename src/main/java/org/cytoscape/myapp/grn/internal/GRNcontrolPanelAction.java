@@ -19,7 +19,6 @@ public class GRNcontrolPanelAction extends AbstractCyAction{
 	
 	public GRNcontrolPanelAction(CySwingApplication desktopApp, GRNcontrolPanel grnControlPanel) {
 		super("GRN");
-		//setPreferredMenu("GRN analysis");
 		
 		this.desktopApp = desktopApp;
 		this.cytoPanelSouth = this.desktopApp.getCytoPanel(CytoPanelName.SOUTH);
@@ -34,11 +33,14 @@ public class GRNcontrolPanelAction extends AbstractCyAction{
 		}
 		
 		int index = cytoPanelSouth.indexOfComponent(grnControlPanel);
+		
 		if(index == -1){
 			return;
 		}
+		
 		cytoPanelSouth.setSelectedIndex(index);
-		}
+		
+	}
 		
 	}
 
