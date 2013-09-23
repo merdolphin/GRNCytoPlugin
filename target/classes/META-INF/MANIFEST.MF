@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1379930362670
+Bnd-LastModified: 1379942206006
 Build-Jdk: 1.6.0_27
 Built-By: lina
 Bundle-Activator: org.cytoscape.myapp.grn.internal.CyActivator

@@ -10,12 +10,9 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 
 import org.cytoscape.application.swing.CytoPanelComponent;
 import org.cytoscape.application.swing.CytoPanelName;
@@ -31,8 +28,8 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 	private JCheckBox bayesianCheckbox;
 	private JCheckBox randomForestCheckbox;
 	private JCheckBox ridgeRegressionCheckbox;	
-	private JButton generateNetworkButton;
-	private String selectedCheckbox = "bayesianCheckbox";	
+	//private JButton generateNetworkButton;
+	//private String selectedCheckbox = "bayesianCheckbox";	
 
 
 	public GRNcontrolPanel(){
@@ -42,7 +39,7 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 		algorithmLayeredPane = new JLayeredPane();
 		algorithmLayeredPane.setPreferredSize(new Dimension(250,200));
 		algorithmLayeredPane.setBorder(BorderFactory.createTitledBorder("Algorithm"));
-		algorithmLayeredPane.setLayout(new GridLayout(5,1));
+		algorithmLayeredPane.setLayout(new GridLayout(3,1));
 		
 		bayesianCheckbox = new JCheckBox("Dynamic Bayesian Networks");
 		bayesianCheckbox.setSelected(true);
@@ -54,15 +51,15 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 		checkboxgroup.add(randomForestCheckbox);
 		checkboxgroup.add(ridgeRegressionCheckbox);
 		
-		generateNetworkButton = new JButton("Generate Network");
+		//generateNetworkButton = new JButton("Generate Network");
 		
 		algorithmLayeredPane.add(bayesianCheckbox);
 		algorithmLayeredPane.add(randomForestCheckbox);
 		algorithmLayeredPane.add(ridgeRegressionCheckbox);
-		algorithmLayeredPane.add(new JSeparator());
-		algorithmLayeredPane.add(generateNetworkButton);
+		//algorithmLayeredPane.add(new JSeparator());
+		//algorithmLayeredPane.add(generateNetworkButton);
 		
-		generateNetworkButton.addActionListener(this);
+		//generateNetworkButton.addActionListener(this);
 
 		this.add(algorithmLayeredPane);
 		this.setVisible(true);
@@ -93,11 +90,11 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 		// TODO Auto-generated method stub
 		return CytoPanelName.SOUTH;
 	}
-
-
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {		
-		
+		/***
 		if( randomForestCheckbox.isSelected() ){
 			selectedCheckbox = "a";
 		
@@ -110,8 +107,10 @@ public class GRNcontrolPanel extends JPanel implements CytoPanelComponent, Actio
 		}
 		
 		JOptionPane.showMessageDialog(null, selectedCheckbox);
+		***/
+	
 	}
 	
-	
-	
 }
+	
+
