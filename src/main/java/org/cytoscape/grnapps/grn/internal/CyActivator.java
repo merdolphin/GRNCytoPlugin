@@ -1,4 +1,4 @@
-package org.cytoscape.myapp.grn.internal;
+package org.cytoscape.grnapps.grn.internal;
 
 import java.util.Properties;
 
@@ -14,21 +14,24 @@ import org.cytoscape.session.CyNetworkNaming;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskFactory;
 import org.osgi.framework.BundleContext;
-import org.cytoscape.myapp.grn.internal.CreateNetworkFromOutput;
 
 public class CyActivator extends AbstractCyActivator {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
 		
+		
 		CyApplicationManager cyAppManager = getService(context, CyApplicationManager.class);
 		CySwingApplication cytoscapeDesktopService = getService(context, CySwingApplication.class);
 		
 		
-		MenuAction action = new MenuAction(cyAppManager, "Open");
+		OpenFileMenuAction action = new OpenFileMenuAction(cyAppManager, "Open");
 		
 		GRNcontrolPanel grnControlPanel = new GRNcontrolPanel();
 		GRNcontrolPanelAction controlPanelAction = new GRNcontrolPanelAction(cytoscapeDesktopService, grnControlPanel);
+		
+		
+		RFtaskFactory rfTaskFactory = new RFtaskFactory();
 		
 		
 		CyNetworkManager cyNetworkManagerServiceRef = getService(context, CyNetworkManager.class);
@@ -51,9 +54,18 @@ public class CyActivator extends AbstractCyActivator {
 		registerService(context,grnControlPanel,CytoPanelComponent.class,properties);
 		registerService(context, controlPanelAction, CyAction.class, properties);
 		
+		
+		Properties rfTaskMonitorTaskFactoryProps = new Properties();
 		Properties createNetworkViewTaskFactoryProps = new Properties();
+		
 		createNetworkViewTaskFactoryProps.setProperty("preferredMenu","Apps.GRN Analysis");
 		createNetworkViewTaskFactoryProps.setProperty("title","Create Network");
+		
+		rfTaskMonitorTaskFactoryProps.setProperty("preferredMenu","Apps.GRN Analysis");
+		rfTaskMonitorTaskFactoryProps.setProperty("title","Random Forest");
+		
+		registerService(context, rfTaskFactory,TaskFactory.class, rfTaskMonitorTaskFactoryProps);
+	
 		registerService(context, createNetworkFromOutput,TaskFactory.class, createNetworkViewTaskFactoryProps);
 		
 		 

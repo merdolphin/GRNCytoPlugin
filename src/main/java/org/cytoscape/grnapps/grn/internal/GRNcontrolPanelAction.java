@@ -1,4 +1,4 @@
-package org.cytoscape.myapp.grn.internal;
+package org.cytoscape.grnapps.grn.internal;
 
 
 import java.awt.event.ActionEvent;

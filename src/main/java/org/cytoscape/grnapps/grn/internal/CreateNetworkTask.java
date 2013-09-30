@@ -1,7 +1,7 @@
 // written by lina <lina.oahz@gmail.com>
 // on Sun Sep 22 00:16:42 SGT 2013
 
-package org.cytoscape.myapp.grn.internal;
+package org.cytoscape.grnapps.grn.internal;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +12,7 @@ import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
+import org.cytoscape.grnapps.grn.internal.Pair;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
@@ -19,7 +20,6 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.session.CyNetworkNaming;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
-import org.cytoscape.myapp.grn.internal.Pair;
 
 public class CreateNetworkTask extends AbstractTask {
 
