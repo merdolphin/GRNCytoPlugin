@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -18,6 +19,9 @@ import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.session.CyNetworkNaming;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 
@@ -26,13 +30,19 @@ public class CreateNetworkTask extends AbstractTask {
 	private final CyNetworkManager netMgr;
 	private final CyNetworkFactory grnNetworkFactory;
 	private final CyNetworkNaming namingUtil;
-
+	private final CyNetworkViewManager networkViewManager;
+	private final CyNetworkViewFactory cnvf;
 
 	public CreateNetworkTask(final CyNetworkManager netMgr,
-			final CyNetworkNaming namingUtil, final CyNetworkFactory grnNetworkFactory) {
+			final CyNetworkNaming namingUtil, 
+			final CyNetworkFactory grnNetworkFactory,
+			final CyNetworkViewManager networkViewManager,
+			final CyNetworkViewFactory cnvf) {
 		this.netMgr = netMgr;
 		this.grnNetworkFactory = grnNetworkFactory;
 		this.namingUtil = namingUtil;
+		this.networkViewManager = networkViewManager;
+		this.cnvf = cnvf;
 	}
 
 	
@@ -50,7 +60,9 @@ public class CreateNetworkTask extends AbstractTask {
 			HashSet<String> allNodes = new HashSet<String>();
 	
 			try {
-				File file = new File("/home/lina/scratch/Network/grn/tmp/finalnetwork.txt");
+				String tmpDir = System.getProperty("java.io.tmpdir");		
+				File file = new File(tmpDir, "finalnetwork.txt");
+				//File file = new File("/home/lina/scratch/Network/grn/tmp/finalnetwork.txt");
 				FileReader reader = new FileReader(file);
 				BufferedReader in = new BufferedReader(reader);
 	
@@ -118,7 +130,19 @@ public class CreateNetworkTask extends AbstractTask {
 			}
 			
 			netMgr.addNetwork(grnNet);
+			
+			final Collection<CyNetworkView> views = networkViewManager.getNetworkViews(grnNet);
 	
+			CyNetworkView myView = null;
+			if(views.size() != 0)
+				myView = views.iterator().next();
+			if(myView == null){
+				myView = cnvf.createNetworkView(grnNet);
+				networkViewManager.addNetworkView(myView);
+			}else{
+				System.out.println("networkView already existed.");
+			}
+			
 			boolean destroyNetwork = false;
 			if (destroyNetwork) {
 				netMgr.destroyNetwork(grnNet);

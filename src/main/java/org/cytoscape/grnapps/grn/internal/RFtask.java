@@ -29,25 +29,21 @@ public class RFtask extends AbstractTask{
 		
 		double matrix[][] = Genie3Time.run(loadedFilePath, "RF", 100);
 		
-		if( new File("finalnetwork.txt").createNewFile() ){
-			System.out.println("Create file successfully.");
-		};
+		String tmpDir = System.getProperty("java.io.tmpdir");		
+		File outputfile = new File(tmpDir, "finalnetwork.txt");
 		
-		File outputfile = new File("finalnetwork.txt");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(outputfile));
 		
 		for(int i=1; i<=matrix.length; i++){
 			for(int j=1; j<=matrix[i-1].length;j++)
 			{
-				bw.append("G"+i+"\t"+"G"+j+"\t"+matrix[i-1][j-1]+"\n");
+				bw.write("G"+i+"\t"+"G"+j+"\t" + (int)matrix[i-1][j-1]);
+				bw.newLine();
 			}
 		}
 			
 		bw.close();
 		
-		
-		String s1 = Integer.toString((int)matrix[0][0]);
-		JOptionPane.showMessageDialog(null,s1);
 		taskMonitor.setProgress(1.0);
 	}
 		   

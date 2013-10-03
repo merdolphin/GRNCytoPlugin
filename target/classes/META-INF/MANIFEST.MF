@@ -6,7 +6,7 @@ Bundle-Name: org.cytoscape.grnapps.grn
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_27
 Bundle-Version: 0.0.1
-Bnd-LastModified: 1380531544838
+Bnd-LastModified: 1380813913976
 Embed-Transitive: true
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.cytoscape.grnapps.grn.internal.CyActivator

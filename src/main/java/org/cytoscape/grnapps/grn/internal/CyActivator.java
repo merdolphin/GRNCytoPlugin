@@ -12,6 +12,8 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.session.CyNetworkNaming;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.work.TaskFactory;
 import org.osgi.framework.BundleContext;
 
@@ -37,9 +39,11 @@ public class CyActivator extends AbstractCyActivator {
 		CyNetworkManager cyNetworkManagerServiceRef = getService(context, CyNetworkManager.class);
 		CyNetworkNaming cyNetworkNamingServiceRef = getService(context, CyNetworkNaming.class);
 		CyNetworkFactory cyNetworkFactoryServiceRef = getService(context, CyNetworkFactory.class);
+		CyNetworkViewManager networkViewManagerServiceRef = getService(context, CyNetworkViewManager.class);
+		CyNetworkViewFactory cyNetworkViewFactoryServiceRef = getService(context, CyNetworkViewFactory.class);
 		
 		CreateNetworkFromOutput  createNetworkFromOutput = new CreateNetworkFromOutput(cyNetworkManagerServiceRef, 
-				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef);
+				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef,networkViewManagerServiceRef, cyNetworkViewFactoryServiceRef);
 	
 		
 		CyNetworkView grnNetworkView = getService(context, CyNetworkView.class);
