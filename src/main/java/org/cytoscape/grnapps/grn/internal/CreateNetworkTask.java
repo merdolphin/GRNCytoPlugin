@@ -19,9 +19,13 @@ import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.session.CyNetworkNaming;
+import org.cytoscape.view.layout.CyLayoutAlgorithm;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.view.model.View;
+import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 
@@ -32,17 +36,26 @@ public class CreateNetworkTask extends AbstractTask {
 	private final CyNetworkNaming namingUtil;
 	private final CyNetworkViewManager networkViewManager;
 	private final CyNetworkViewFactory cnvf;
-
+	private CyNetworkView grnView;
+	private final CyLayoutAlgorithm grnLayout;
+	private final VisualMappingManager grnVMM;
+	
 	public CreateNetworkTask(final CyNetworkManager netMgr,
 			final CyNetworkNaming namingUtil, 
 			final CyNetworkFactory grnNetworkFactory,
 			final CyNetworkViewManager networkViewManager,
-			final CyNetworkViewFactory cnvf) {
+			final CyNetworkViewFactory cnvf,
+			final CyNetworkView grnView,
+			final CyLayoutAlgorithm grnLayout,
+			final VisualMappingManager grnVMM) {
 		this.netMgr = netMgr;
 		this.grnNetworkFactory = grnNetworkFactory;
 		this.namingUtil = namingUtil;
 		this.networkViewManager = networkViewManager;
 		this.cnvf = cnvf;
+		this.grnView = grnView;
+		this.grnLayout = grnLayout;
+		this.grnVMM = grnVMM;
 	}
 
 	
@@ -129,19 +142,30 @@ public class CreateNetworkTask extends AbstractTask {
 				grnNet.addEdge(nodesnameMap.get(key.getSource()), nodesnameMap.get(key.getTarget()), true);
 			}
 			
+			
 			netMgr.addNetwork(grnNet);
 			
 			final Collection<CyNetworkView> views = networkViewManager.getNetworkViews(grnNet);
-	
-			CyNetworkView myView = null;
+			
+			grnView = null;
+			
 			if(views.size() != 0)
-				myView = views.iterator().next();
-			if(myView == null){
-				myView = cnvf.createNetworkView(grnNet);
-				networkViewManager.addNetworkView(myView);
+				grnView = views.iterator().next();
+			if(grnView == null){
+				grnView = cnvf.createNetworkView(grnNet);
+				networkViewManager.addNetworkView(grnView);
 			}else{
 				System.out.println("networkView already existed.");
 			}
+				
+			insertTasksAfterCurrentTask(grnLayout.createTaskIterator(grnView, grnLayout.createLayoutContext(),
+					new HashSet<View<CyNode>>(grnView.getNodeViews()), CyNetwork.NAME));
+			
+			VisualStyle vs = grnVMM.getDefaultVisualStyle();
+			
+
+			vs.apply(grnView);
+			grnView.updateView();
 			
 			boolean destroyNetwork = false;
 			if (destroyNetwork) {

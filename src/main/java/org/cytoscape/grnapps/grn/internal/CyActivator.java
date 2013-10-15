@@ -1,6 +1,6 @@
 package org.cytoscape.grnapps.grn.internal;
 
-import java.util.Properties;
+import java.util.Properties;	
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.swing.CyAction;
@@ -11,11 +11,14 @@ import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.session.CyNetworkNaming;
+import org.cytoscape.view.layout.CyLayoutAlgorithm;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.work.TaskFactory;
 import org.osgi.framework.BundleContext;
+
 
 public class CyActivator extends AbstractCyActivator {
 
@@ -42,8 +45,16 @@ public class CyActivator extends AbstractCyActivator {
 		CyNetworkViewManager networkViewManagerServiceRef = getService(context, CyNetworkViewManager.class);
 		CyNetworkViewFactory cyNetworkViewFactoryServiceRef = getService(context, CyNetworkViewFactory.class);
 		
+		CyLayoutAlgorithm grnLayout = getService(context, CyLayoutAlgorithm.class);
+		CyNetworkView view = getService(context, CyNetworkView.class);
+		
+		VisualMappingManager VMMserviceRef = getService(context,VisualMappingManager.class);
+		
 		CreateNetworkFromOutput  createNetworkFromOutput = new CreateNetworkFromOutput(cyNetworkManagerServiceRef, 
-				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef,networkViewManagerServiceRef, cyNetworkViewFactoryServiceRef);
+				cyNetworkNamingServiceRef,cyNetworkFactoryServiceRef, 
+				networkViewManagerServiceRef, cyNetworkViewFactoryServiceRef, 
+				view, grnLayout,
+				VMMserviceRef);
 	
 		
 		CyNetworkView grnNetworkView = getService(context, CyNetworkView.class);
@@ -59,15 +70,14 @@ public class CyActivator extends AbstractCyActivator {
 		registerService(context, controlPanelAction, CyAction.class, properties);
 		
 		
-		Properties rfTaskMonitorTaskFactoryProps = new Properties();
 		Properties createNetworkViewTaskFactoryProps = new Properties();
-		
 		createNetworkViewTaskFactoryProps.setProperty("preferredMenu","Apps.GRN Analysis");
 		createNetworkViewTaskFactoryProps.setProperty("title","Create Network");
-		
-		rfTaskMonitorTaskFactoryProps.setProperty("preferredMenu","Apps.GRN Analysis");
+
+		Properties rfTaskMonitorTaskFactoryProps = new Properties();
+		rfTaskMonitorTaskFactoryProps.setProperty("useCheckBoxMenuItem","true");
+		rfTaskMonitorTaskFactoryProps.setProperty("preferredMenu","Apps.GRN Analysis.Algorithms");
 		rfTaskMonitorTaskFactoryProps.setProperty("title","Random Forest");
-		
 		registerService(context, rfTaskFactory,TaskFactory.class, rfTaskMonitorTaskFactoryProps);
 	
 		registerService(context, createNetworkFromOutput,TaskFactory.class, createNetworkViewTaskFactoryProps);

@@ -5,12 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
-
 import birc.grni.rf.Genie3Time;
 
 public class RFtask extends AbstractTask{

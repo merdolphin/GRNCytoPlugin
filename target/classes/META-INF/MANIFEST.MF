@@ -6,7 +6,7 @@ Bundle-Name: org.cytoscape.grnapps.grn
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_27
 Bundle-Version: 0.0.1
-Bnd-LastModified: 1380813913976
+Bnd-LastModified: 1381809586318
 Embed-Transitive: true
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.cytoscape.grnapps.grn.internal.CyActivator
@@ -18,8 +18,10 @@ Import-Package: javax.swing;resolution:=optional,javax.swing.border;re
  .0,4)",org.cytoscape.model;resolution:=optional;version="[3.0,4)",org
  .cytoscape.service.util;resolution:=optional;version="[3.0,4)",org.cy
  toscape.session;resolution:=optional;version="[3.0,4)",org.cytoscape.
- view.model;resolution:=optional;version="[3.0,4)",org.cytoscape.work;
- resolution:=optional;version="[3.0,4)",org.osgi.framework;resolution:
- =optional;version="[1.5,2)"
+ view.layout;resolution:=optional;version="[3.0,4)",org.cytoscape.view
+ .model;resolution:=optional;version="[3.0,4)",org.cytoscape.view.vizm
+ ap;resolution:=optional;version="[3.0,4)",org.cytoscape.work;resoluti
+ on:=optional;version="[3.0,4)",org.osgi.framework;resolution:=optiona
+ l;version="[1.5,2)"
 Bundle-SymbolicName: org.cytoscape.grnapps.grn
 
